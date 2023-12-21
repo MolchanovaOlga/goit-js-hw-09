@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const images = [
     {
       preview:
@@ -73,7 +76,6 @@ const images = [
       <img
         class="gallery-image"
         src="${preview}"
-        data-source="${original}"
         alt="${description}"
       />
     </a>
@@ -82,27 +84,8 @@ const images = [
   }).join('');
   gallery.insertAdjacentHTML('beforeend', galleryList);
 
-  gallery.addEventListener('click', event => event.preventDefault());
-
-  function modalWindow(event) {
-    if (event.target.nodeName !== 'IMG') {
-      return;
-    }
-
-    const instance = basicLightbox.create(
-      `<img src="${event.target.dataset.source}" width="1112" height="640"/>`,
-      {
-        onShow: (instance) => {document.addEventListener('keydown', eventEsc)},
-        onClose: (instance) => {document.removeEventListener('keydown', eventEsc)}
-      }
-      );
-    instance.show();
-
-    function eventEsc(event) {
-      if (event.code === "Escape") {
-        instance.close();
-      }
-    };
-  };
-
-  gallery.addEventListener('click', modalWindow);
+  const newLightBox = new SimpleLightbox('.gallery a', {
+    captionsData: "alt",
+    captionDelay: 250,
+  });
+  
