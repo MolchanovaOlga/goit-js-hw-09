@@ -27,8 +27,7 @@ function getFeedback(event) {
     if (email.value.trim() == '' || message.value.trim() == '') {
         alert('All form fields must be filled in.');
     } else {
-    //console.log(JSON.parse(localStorage.getItem(localStorageKey)));
-    console.log(objFromLocalStorage);
+    console.log(JSON.parse(localStorage.getItem(localStorageKey)));
     localStorage.removeItem(localStorageKey);
     form.reset();
     }
