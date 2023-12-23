@@ -6,7 +6,7 @@ const message = form.elements.message;
 let objFromLocalStorage = {};
 if (localStorage.getItem(localStorageKey)) {
     objFromLocalStorage = JSON.parse(localStorage.getItem(localStorageKey));
-    email.value =objFromLocalStorage.email;
+    email.value = objFromLocalStorage.email;
     message.value = objFromLocalStorage.message;
 }
 
@@ -24,10 +24,13 @@ form.addEventListener('submit', getFeedback);
 
 function getFeedback(event) {
     event.preventDefault();
-    if (email.value.trim() !== '' && message.value.trim() !== '') {
-    console.log(JSON.parse(localStorage.getItem(localStorageKey)));
+    if (email.value.trim() == '' || message.value.trim() == '') {
+        alert('All form fields must be filled in.');
+    } else {
+    //console.log(JSON.parse(localStorage.getItem(localStorageKey)));
+    console.log(objFromLocalStorage);
     localStorage.removeItem(localStorageKey);
+    form.reset();
     }
-      form.reset();
 }
 
